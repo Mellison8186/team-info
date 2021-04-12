@@ -1,10 +1,26 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const src = require('src');
-// const writeFileAsync = src.promisify(fs.writeFile);
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+const generateHTML = require('./generateHTML');
+
+const writeToFile = (data)=> {
+  return new Promise((resolve, reject) => {
+      fs.writeToFile('./dist/team.html', generateHTML(data), err => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve({
+          ok: true,
+          message: 'File created!'
+        });
+      });
+    });
+  };
+
+  var team = []
 
 function init() {
   
@@ -31,9 +47,10 @@ function init() {
     }
     ]).then(answers => {
       var manager = new Manager(answers.mgrName, answers.employeeId, answers.emailAddy, answers.officeNum)
-        console.log(manager);
+      console.log(manager);
+      team.push(manager);
+
         createEmployee()
-        // writeFileAsync('team.html',html(manager))}
     });
         };
 
@@ -72,9 +89,11 @@ function init() {
               ]).then(data => {
                 var engineer = new Engineer(data.engName, data.employeeId, data.emailAddy, data.github)
                 console.log(engineer)
-          // writeFileAsync('team.html',html(engineer));
+                team.push(engineer);
+                createEmployee()
               })
             };
+
             if (data.employeeType == 'Intern'){
               return inquirer.prompt([
               {
@@ -100,12 +119,15 @@ function init() {
               ]).then(data => {
                 var intern = new Intern(data.internName, data.employeeId, data.emailAddy, data.school)
                 console.log(intern)
+                team.push(intern);
+                createEmployee()
               });
             };
-            if (data.employeeType == 'Finish'){
-              // writeFileAsync('team.html',html(engineer));
-            }
-          })
 
+            if (data.employeeType == 'Finish'){
+              writeToFile();
+              return
+            };
+          });
         };
 init()
