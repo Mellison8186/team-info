@@ -17,6 +17,6 @@ https://drive.google.com/file/d/1JZgmioE66NNfkr7i92rxT60F6eAWmXpL/view
 https://mellison8186.github.io/team-info/
 
 ## Contribution
-Maribel Ellison
-Merriam Massey
-Emily Stuart
+* Maribel Ellison
+* Merriam Massey
+* Emily Stuart
