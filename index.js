@@ -1,24 +1,17 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const Manager = require('./lib/Manager');
-const generateHTML = require('./generateHTML');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
+const Manager = require('./lib/Manager.js');
+const generateHTML = require('./src/generateHTML.js');
 
-const writeToFile = (data)=> {
-  return new Promise((resolve, reject) => {
-      fs.writeToFile('./dist/team.html', generateHTML(data), err => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve({
-          ok: true,
-          message: 'File created!'
+const writeToFile = (data) => {
+  console.log(data)
+
+      fs.writeFile('./myteam.html', generateHTML(data), err => {
+        if (err) throw err;
         });
-      });
-    });
-  };
+      };
 
   var team = []
 
@@ -47,7 +40,6 @@ function init() {
     }
     ]).then(answers => {
       var manager = new Manager(answers.mgrName, answers.employeeId, answers.emailAddy, answers.officeNum)
-      console.log(manager);
       team.push(manager);
 
         createEmployee()
@@ -86,9 +78,8 @@ function init() {
               name: 'github',
               message: "Input Engineer's GitHub:"
               },
-              ]).then(data => {
-                var engineer = new Engineer(data.engName, data.employeeId, data.emailAddy, data.github)
-                console.log(engineer)
+              ]).then(answers => {
+                var engineer = new Engineer(answers.engName, answers.employeeId, answers.emailAddy, answers.github)
                 team.push(engineer);
                 createEmployee()
               })
@@ -118,14 +109,13 @@ function init() {
               },
               ]).then(data => {
                 var intern = new Intern(data.internName, data.employeeId, data.emailAddy, data.school)
-                console.log(intern)
                 team.push(intern);
                 createEmployee()
               });
             };
 
             if (data.employeeType == 'Finish'){
-              writeToFile();
+              writeToFile(team);
               return
             };
           });
