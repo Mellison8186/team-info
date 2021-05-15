@@ -3,12 +3,12 @@ const fs = require('fs');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const Manager = require('./lib/Manager.js');
-const generateHTML = require('./src/generateHTML.js');
+const generatePage = require('./src/generateHTML.js');
 
 const writeToFile = (data) => {
   console.log(data)
 
-      fs.writeFile('./myteam.html', generateHTML(data), err => {
+      fs.writeFile('./myteam.html', generatePage(data), err => {
         if (err) throw err;
         });
       };
