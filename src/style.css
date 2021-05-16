@@ -1,5 +1,5 @@
 body {
-    background-color: #651366;
+    background-color: #AAB3AB;
 }
 
 header, 
@@ -10,18 +10,21 @@ header,
     height: 20%;
     padding: 2% 0 2% 0;
     margin: 1% 0 0 10%;
-    background-color: #A71A5B;
+    background-color: #C4CBB7;
 }
 
-h3 {
+h1 {
     align-items: center;
     text-align: center;
-    color: white;
-    font-size: 3em;
+}
+
+h5,
+h6 {
+    background-color: #EBEFC9;
 }
 
 .card-body {
-    background-color: #E7204E;
+    background-color: #EEE0B7;
 }
 
 .row {
@@ -31,5 +34,5 @@ h3 {
 .list-group,
 .list-group-flush,
 .list-group-item {
-    background-color: #F76E2A;
+    background-color: #E8CAAF;
 }
